@@ -23,8 +23,7 @@ If you trust me (note: you shouldn't) you can use pre-built images from my Docke
 $ sudo docker pull vtorhonen/docker-zcash:1.0.10-1
 ```
 
-Image size is about size is about 330 MB
-My suggestion is that you build your own images.
+Image size is about size is about 990 MB. My suggestion is that you build your own images.
 
 # Running a Zcash node
 
