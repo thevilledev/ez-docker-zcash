@@ -1,6 +1,6 @@
 # docker-zcash
 
-Docker configuration for building & running Zcash node & client in Docker. Makes it super easy to set up your own Zcash wallet.
+Docker configuration for building & running Zcash node & client in Docker. Makes it super easy to set up your own Zcash wallet. That's why zk-SNARK proofs are baked into the image rather than shared through a volume.
 
 By default does not expose RPC interface outside of the container.
 
