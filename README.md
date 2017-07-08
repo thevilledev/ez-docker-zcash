@@ -1,6 +1,6 @@
 # docker-zcash
 
-Docker configuration for building & running Zcash node & client in Docker.
+Docker configuration for building & running Zcash node & client in Docker. By default does not expose RPC interface outside of the container.
 
 Requires multi-stage support from Docker, so version >= 17.05 is required.
 
@@ -23,37 +23,48 @@ If you trust me (note: you shouldn't) you can use pre-built images from my Docke
 $ sudo docker pull vtorhonen/docker-zcash:1.0.10-1
 ```
 
-Image size is about size is about 990 MB. My suggestion is that you build your own images.
+Compressed image size is about about 990 MB.
 
 # Running a Zcash node
 
-This container uses `/zcash/data` as data directory for Zcash. Needless to say, you should use some sort of persistent storage.
+This container uses `/zcash/data` by default as the data directory for Zcash. Needless to say, you should use some sort of persistent storage to store the blockchain and your wallet.
+
+Container supports the following environment variables for configuration:
+
+| Environment variable | Default value | Description |
+-----------------------|---------------|--------------
+`ZCASH_RPCUSER`     | 32 char long random string | Username for RPC access. Randomized on startup, if not set.
+`ZCASH_RPCPASSWORD` | 32 chra long random string | Password for RPC access. Randomized on startup, if not set.
+`ZCASH_ADDNODE`     | `mainnet.z.cash` | Target network. Uses zcash main network by default.
+`ZCASH_DATADIR`     | `/zcash/data`| Data directory for storing blockchain and wallet.
 
 Run the following command to run a Zcash node by using local volume mounts in interactive mode:
 
 ```
 $ mkdir data
-$ sudo docker run --name my-zcash -ditv $(pwd)/data:/zcash/data vtorhonen/docker-zcash -datadir=/zcash/data
+$ sudo docker run \
+--name zcash-node -dit \
+-v $(pwd)/data:/zcash/data \
+vtorhonen/docker-zcash
 ```
 If you want to attach to the process to see where blockchaing sync is at you can run:
 
 ```
-$ sudo docker attach my-zcash
+$ sudo docker attach zcash-node
 ```
 
 Use `^C-p-^C-q` to detach. Do not use `^C-c` or you will exit the shell and kill your node.
 
 
-# Running Zcash CLI (your wallet)
+# Running Zcash CLI
 
 You can interact with your wallet by using `zcash-cli` as follows:
 
 ```
-$ docker exec -ti my-zcash zcash-cli -datadir=/zcash/data getbalance
+$ docker exec -ti zcash-node zcash-cli getbalance
 0.00000000
 ```
 
 # Backing up your wallet
 
 Your data directory is super important. Take backups by following [instructions from Zcash documentation](https://github.com/zcash/zcash/blob/master/doc/wallet-backup.md).
-
