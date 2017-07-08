@@ -2,9 +2,6 @@
 
 set -Eeuo pipefail
 
-RANDOM_USER="$(head -c 32 /dev/urandom | base64)"
-RANDOM_USER="$(head -c 32 /dev/urandom | base64)"
-
 : ${ZCASH_ADDNODE:="mainnet.z.cash"}
 : ${ZCASH_DATADIR:="/zcash/data"}
 : ${ZCASH_RPCUSER:="$(head -c 32 /dev/urandom | base64)"}

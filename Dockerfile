@@ -38,6 +38,8 @@ RUN set -x && \
 
 # Copy binaries and libs from builder to a separate image
 FROM debian:jessie-slim
+MAINTAINER Ville Törhönen <ville@torhonen.fi>
+
 RUN  mkdir -p /zcash/data && \
      mkdir -p /root/.zcash
 WORKDIR /usr/local/bin
