@@ -13,7 +13,7 @@ Clone this repository:
 ```
 $ git clone https://github.com/vtorhonen/ez-docker-zcash.git
 $ cd docker-zcash
-$ sudo docker build -t docker-zcash .
+$ sudo docker build -t my-docker-zcash .
 ```
 It takes quite a while to build the app. Grab a beer or two while waiting.
 
@@ -45,9 +45,9 @@ Run the following command to run a Zcash node by using local volume mounts in in
 ```
 $ mkdir data
 $ sudo docker run \
---name zcash-node -dit \
--v $(pwd)/data:/zcash/data \
-vtorhonen/ez-docker-zcash
+	--name zcash-node -dit \
+	-v $(pwd)/data:/zcash/data \
+	vtorhonen/ez-docker-zcash
 ```
 If you want to attach to the process to see where blockchaing sync is at you can run:
 
