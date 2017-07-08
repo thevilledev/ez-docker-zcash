@@ -38,7 +38,7 @@ It takes quite a while to build the app. Grab a beer or two while waiting.
 
 # Using pre-built images
 
-If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub: https://hub.docker.com/r/vtorhonen/docker-zcash/
+If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub: https://hub.docker.com/r/vtorhonen/ez-docker-zcash/
 
 This is obviously the fastest way. Just start the node with `docker-compose`:
 
@@ -46,7 +46,7 @@ This is obviously the fastest way. Just start the node with `docker-compose`:
 $ sudo docker-compose up -d
 ```
 
-Compressed image size is about about 990 MB.
+This downloads the image from Dockerhub and starts the container. Compressed image size is about about 990 MB.
 
 Data directory called `data` is created to the working directory upon startup. It is then mounted to the container by default. You won't lose your wallet if you destroy the container.
 
