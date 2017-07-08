@@ -1,0 +1,8 @@
+version: '2'
+services:
+  zcash:
+    tty: true
+    build: .
+    image: docker.io/vtorhonen/ez-docker-zcash:1.0.10-1
+    volumes:
+     - ./data:/zcash/data
