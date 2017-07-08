@@ -11,7 +11,7 @@ Build requires multi-stage support from Docker, so version >= 17.05 is required.
 Clone this repository:
 
 ```
-$ git clone https://github.com/vtorhonen/docker-zcash.git
+$ git clone https://github.com/vtorhonen/ez-docker-zcash.git
 $ cd docker-zcash
 $ sudo docker build -t docker-zcash .
 ```
@@ -22,7 +22,7 @@ It takes quite a while to build the app. Grab a beer or two while waiting.
 If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub: https://hub.docker.com/r/vtorhonen/docker-zcash/
 
 ```
-$ sudo docker pull vtorhonen/docker-zcash:1.0.10-1
+$ sudo docker pull vtorhonen/ez-docker-zcash:1.0.10-1
 ```
 
 Compressed image size is about about 990 MB.
@@ -47,7 +47,7 @@ $ mkdir data
 $ sudo docker run \
 --name zcash-node -dit \
 -v $(pwd)/data:/zcash/data \
-vtorhonen/docker-zcash
+vtorhonen/ez-docker-zcash
 ```
 If you want to attach to the process to see where blockchaing sync is at you can run:
 
