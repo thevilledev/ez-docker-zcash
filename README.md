@@ -125,3 +125,5 @@ Your data directory is super important. Take backups by following [instructions 
 # Feedback
 
 Feedback is more than welcome! If you have any questions, feedback or improvements just create a Github issue.
+
+You can also send your feedback as $ZEC to `zcVufj8Mr72R3hkimB982RSpZPsrUQHW7eHJHq9jhuF7SxsN5bZJsHjM8AxLuQCZkQu43mwhigqkMuBPen8A2MH9ipdjaop`. :)
