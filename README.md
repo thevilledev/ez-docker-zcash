@@ -65,7 +65,6 @@ Check your balance:
 ```
 $ docker exec -ti zcash-node zcash-cli getbalance
 0.00000000
-$ docker 
 ```
 
 Generate new Z-type address:
