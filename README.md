@@ -1,6 +1,8 @@
 # docker-zcash
 
-Docker configuration for building & running Zcash node & client in Docker. By default does not expose RPC interface outside of the container.
+Docker configuration for building & running Zcash node & client in Docker. Makes it super easy to set up your own Zcash wallet.
+
+By default does not expose RPC interface outside of the container.
 
 Build requires multi-stage support from Docker, so version >= 17.05 is required.
 
@@ -17,7 +19,7 @@ It takes quite a while to build the app. Grab a beer or two while waiting.
 
 # Using pre-built images
 
-If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub.
+If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub: https://hub.docker.com/r/vtorhonen/docker-zcash/
 
 ```
 $ sudo docker pull vtorhonen/docker-zcash:1.0.10-1
