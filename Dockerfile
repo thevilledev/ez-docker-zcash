@@ -38,20 +38,16 @@ RUN set -x && \
 
 # Copy binaries and libs from builder to a separate image
 FROM debian:jessie-slim
-RUN useradd -m zcash && \
-    mkdir -p /home/zcash/data && \
-    mkdir -p /home/zcash/.zcash && \
-    chown -R zcash:zcash /home/zcash
+RUN  mkdir -p /zcash/data && \
+     mkdir -p /root/.zcash
 WORKDIR /usr/local/bin
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libgomp.so.1 /lib/x86_64-linux-gnu/libgomp.so.1
 COPY --from=builder /tmp/zcash/src/zcashd .
 COPY --from=builder /tmp/zcash/src/zcash-cli .
 COPY --from=builder /tmp/zcash/src/zcash-gtest .
-COPY --from=builder /root/.zcash-params /home/zcash/.zcash-params
+COPY --from=builder /root/.zcash-params /root/.zcash-params
 
-# Run the container as zcash user
 # Use zcashd as the entrypoint
-USER zcash
-WORKDIR /home/zcash
+WORKDIR /zcash
 COPY docker-entrypoint.sh /home/zcash/docker-entrypoint.sh
 ENTRYPOINT [ "/home/zcash/docker-entrypoint.sh" ]
