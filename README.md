@@ -34,7 +34,7 @@ Container supports the following environment variables for configuration:
 | Environment variable | Default value | Description |
 -----------------------|---------------|--------------
 `ZCASH_RPCUSER`     | 32 char long random string | Username for RPC access. Randomized on startup, if not set.
-`ZCASH_RPCPASSWORD` | 32 chra long random string | Password for RPC access. Randomized on startup, if not set.
+`ZCASH_RPCPASSWORD` | 32 char long random string | Password for RPC access. Randomized on startup, if not set.
 `ZCASH_ADDNODE`     | `mainnet.z.cash` | Target network. Uses zcash main network by default.
 `ZCASH_DATADIR`     | `/zcash/data`| Data directory for storing blockchain and wallet.
 
