@@ -1,33 +1,86 @@
-# docker-zcash
+# ez-docker-zcash
 
-Docker configuration for building & running Zcash node & client in Docker. Makes it super easy to set up your own Zcash wallet. That's why zk-SNARK proofs are baked into the image rather than shared through a volume.
+This just might be the easiest way to get a Zcash node/wallet running!
 
-By default does not expose RPC interface outside of the container.
+Includes Docker configuration for building & running Zcash node in Docker. No need to install any extra build tools into your OS.
+
+The zk-SNARK proofs are baked into the image rather than shared through a volume. This suits very well for those who just want a single Zcash wallet running as fast as possible.
+
+# Prequisites
 
 Build requires multi-stage support from Docker, so version >= 17.05 is required.
 
+Install `docker-compose` if you want to use it to set up your node. Useful for all the lazy people.
+
 # Building
 
-Clone this repository:
+First clone this repository:
 
 ```
 $ git clone https://github.com/vtorhonen/ez-docker-zcash.git
-$ cd docker-zcash
+$ cd ez-docker-zcash
+```
+
+Use `docker-compose` if you want things blazing fast.
+
+```
+$ sudo docker-compose build
+$ sudo docker-compose up -d
+```
+
+Build with `docker build`:
+
+```
 $ sudo docker build -t my-docker-zcash .
 ```
+
 It takes quite a while to build the app. Grab a beer or two while waiting.
 
 # Using pre-built images
 
 If you trust me (note: you shouldn't) you can use pre-built images from my Dockerhub: https://hub.docker.com/r/vtorhonen/docker-zcash/
 
+This is obviously the fastest way. Just start the node with `docker-compose`:
+
 ```
-$ sudo docker pull vtorhonen/ez-docker-zcash:1.0.10-1
+$ sudo docker-compose up -d
 ```
 
 Compressed image size is about about 990 MB.
 
-# Running a Zcash node
+Data directory called `data` is created to the working directory upon startup. It is then mounted to the container by default. You won't lose your wallet if you destroy the container.
+
+Since Dockerhub doesn't support multi-stage builds yet (see issue [#1](https://github.com/vtorhonen/ez-docker-zcash/issues/1)) the builds are probably not as transparent as they should be. Will be fixed.
+
+# Accessing your wallet
+
+You can interact with your wallet by using `zcash-cli.sh` wrapper script. Note that blockchain syncing takes 4-5 hours to complete after container startup and it is wise to wait.
+
+Check current sync status:
+
+```
+$ ./zcash-cli.sh getinfo
+```
+
+Run it a couple of times to see if the value of `blocks` is changing.
+
+Check your wallet balance:
+
+```
+$ ./zcash-cli.sh getbalance
+0.00000000
+```
+
+Generate new Z-type address:
+
+```
+$ ./zcash-cli.sh z_getnewaddress
+zcTQgjnCDsmgSK64EACpsJy3QoQSpaCP8NbDeCF8xTyG5q5KFujjdaDSKVDcs2JtDpN7vCFL9rEPPY4tETYHZtt5iasYkjo
+```
+
+Run `./zcash-cli.sh help` to get full command reference.
+
+# Running a Zcash node manually
 
 This container uses `/zcash/data` by default as the data directory for Zcash. Needless to say, you should use some sort of persistent storage to store the blockchain and your wallet.
 
@@ -57,25 +110,18 @@ $ sudo docker attach zcash-node
 
 Use `^C-p-^C-q` to detach. Do not use `^C-c` or you will exit the shell and kill your node.
 
-
-# Running Zcash CLI
-
-You can interact with your wallet by using `zcash-cli` inside the container.
-
-Check your balance:
+You can also use the wrapper script by defining a custom `CONTAINER_NAME` environment variable.
 
 ```
-$ docker exec -ti zcash-node zcash-cli getbalance
+$ export CONTAINER_NAME="zcash-node"
+$ ./zcash-cli.sh getbalance
 0.00000000
-```
-
-Generate new Z-type address:
-
-```
-$ docker exec -ti zcash-node zcash-cli z_getnewaddress
-zcTQgjnCDsmgSK64EACpsJy3QoQSpaCP8NbDeCF8xTyG5q5KFujjdaDSKVDcs2JtDpN7vCFL9rEPPY4tETYHZtt5iasYkjo
 ```
 
 # Backing up your wallet
 
 Your data directory is super important. Take backups by following [instructions from Zcash documentation](https://github.com/zcash/zcash/blob/master/doc/wallet-backup.md).
+
+# Feedback
+
+Feedback is more than welcome! If you have any questions, feedback or improvements just create a Github issue.
