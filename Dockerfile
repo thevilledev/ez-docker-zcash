@@ -46,10 +46,9 @@ WORKDIR /usr/local/bin
 COPY --from=builder /usr/lib/x86_64-linux-gnu/libgomp.so.1 /lib/x86_64-linux-gnu/libgomp.so.1
 COPY --from=builder /tmp/zcash/src/zcashd .
 COPY --from=builder /tmp/zcash/src/zcash-cli .
-COPY --from=builder /tmp/zcash/src/zcash-gtest .
 COPY --from=builder /root/.zcash-params /root/.zcash-params
 
-# Use zcashd as the entrypoint
+# Use custom entrypoint
 WORKDIR /zcash
-COPY docker-entrypoint.sh /home/zcash/docker-entrypoint.sh
-ENTRYPOINT [ "/home/zcash/docker-entrypoint.sh" ]
+COPY docker-entrypoint.sh /zcash/docker-entrypoint.sh
+ENTRYPOINT [ "/zcash/docker-entrypoint.sh" ]
