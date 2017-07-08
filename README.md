@@ -2,9 +2,9 @@
 
 Docker configuration for building & running Zcash node & client in Docker. By default does not expose RPC interface outside of the container.
 
-Requires multi-stage support from Docker, so version >= 17.05 is required.
+Build requires multi-stage support from Docker, so version >= 17.05 is required.
 
-# Building your own image
+# Building
 
 Clone this repository:
 
@@ -58,11 +58,21 @@ Use `^C-p-^C-q` to detach. Do not use `^C-c` or you will exit the shell and kill
 
 # Running Zcash CLI
 
-You can interact with your wallet by using `zcash-cli` as follows:
+You can interact with your wallet by using `zcash-cli` inside the container.
+
+Check your balance:
 
 ```
 $ docker exec -ti zcash-node zcash-cli getbalance
 0.00000000
+$ docker 
+```
+
+Generate new Z-type address:
+
+```
+$ docker exec -ti zcash-node zcash-cli z_getnewaddress
+zcTQgjnCDsmgSK64EACpsJy3QoQSpaCP8NbDeCF8xTyG5q5KFujjdaDSKVDcs2JtDpN7vCFL9rEPPY4tETYHZtt5iasYkjo
 ```
 
 # Backing up your wallet
