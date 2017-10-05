@@ -3,6 +3,6 @@ services:
   zcash:
     tty: true
     build: .
-    image: docker.io/vtorhonen/ez-docker-zcash:1.0.10-1
+    image: docker.io/vtorhonen/ez-docker-zcash:1.0.12
     volumes:
      - ./data:/zcash/data

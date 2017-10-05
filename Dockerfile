@@ -28,7 +28,7 @@ RUN set -x && \
 RUN set -x && \
     git clone https://github.com/zcash/zcash.git /tmp/zcash && \
     cd /tmp/zcash && \
-    git checkout v1.0.10-1 && \
+    git checkout v1.0.12 && \
     bash zcutil/fetch-params.sh
 
 # Build the app
